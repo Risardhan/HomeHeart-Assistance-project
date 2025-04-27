@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caregiving Store - Care Essentials</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Typeahead.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #8ce99d, #ffffff);
+      margin-left: 0px;
+    }
+
+    .hero {
+      margin-top:20px;
+      text-align: center;
+      padding: 60px 20px;
+      background-color: #eafce9;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .card {
+      height: 100%;
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+      background-color: #ffffff;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .btn-primary {
+      background-color: #4CAF50;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      background-color: white;
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+    .scroll {
+      position: relative;
+    }
+    .faq-content {
+      height: 100vh;
+      overflow-y: scroll;
+    }
+    .faq-item {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+    #faq-nav {
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .table th, .table td {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+    <div class="container-fluid">
+        <!-- Brand Logo with Image -->
+    <a class="navbar-brand fs-2 text-dark" href="#">
+      <img src="https://static.vecteezy.com/system/resources/previews/004/745/862/original/heart-in-house-or-home-free-vector.jpg" alt="Techno-Wed Logo" style="height: 50px; width: auto; margin-right: 10px;">
+      <span class="text-danger">HomeHeart</span>Assistance</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item active"><a class="nav-link" href="ex.home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="aboutus.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="Store.html">Store</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" id="search-box" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <script>
+         $(document).ready(function() {
+  var states = ['Bathing & Grooming','Medication Reminders','Mobility Assistance','Companionship','Oral Care',
+    'General Cleaning','Window Washing','Light Maintenance','Laundry & Ironing','Organization & Decluttering','Customized Meal Plans',
+    'Healthy Ingredient Selection','Portion Control'];
+
+  var stateSuggestions = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: states
+  });
+
+  // Optional: Uncomment if needed
+  // stateSuggestions.initialize();
+
+  $('#search-box').typeahead(
+    {
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'states',
+      source: stateSuggestions
+    }
+  );
+});
+
+  </script>
+      </div>
+    </div>
+  </nav>
+  
+
+  <div class="container-fluid">
+    <div class="hero">
+      <h1 class="display-4">Care Essentials Store</h1>
+      <p>Browse quality products to support your caregiving needs</p>
+    </div>
+
+    <!-- New Promotions Alert -->
+<div class="alert alert-info text-center rounded-0 mb-0" role="alert">
+  🎉 Limited Offer: Get 10% off all caregiving essentials this week only!
+</div>
+
+    <div class="row g-4">
+      <!-- Product Cards -->
+      <div class="col-md-4 d-flex">
+        <div class="card">
+          <img src="https://i.ebayimg.com/00/s/MTAwMFgxMDAw/z/cCsAAOSwFShavBOu/$_86.JPG" class="card-img-top img-fluid" alt="Wheelchair">
+          <div class="card-body">
+            <h5 class="card-title">Comfort Wheelchair</h5>
+            <p class="card-text">Lightweight, foldable wheelchair perfect for indoor and outdoor use.</p>
+            <p><strong>₹9,999</strong></p>
+            <button class="btn btn-success w-100 add-to-cart"><i class="fa fa-cart-plus me-2"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex">
+        <div class="card">
+          <img src="https://images-na.ssl-images-amazon.com/images/I/81Dt6e4XLML._AC_SL1500_.jpg" class="card-img-top img-fluid" alt="Medical Kit">
+          <div class="card-body">
+            <h5 class="card-title">First Aid Medical Kit</h5>
+            <p class="card-text">Essential supplies for handling everyday health emergencies.</p>
+            <p><strong>₹599</strong></p>
+            <button class="btn btn-success w-100 add-to-cart"><i class="fa fa-cart-plus me-2"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex">
+        <div class="card">
+          <img src="https://www.gosupps.com/media/catalog/product/8/1/810Kz_3fG_L.jpg" class="card-img-top" alt="Pill Organizer">
+          <div class="card-body">
+            <h5 class="card-title">Weekly Pill Organizer</h5>
+            <p class="card-text">Stay on schedule with medication using this easy-to-use planner.</p>
+            <p><strong>₹199</strong></p>
+            <button class="btn btn-success w-100 add-to-cart"><i class="fa fa-cart-plus me-2"></i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Spinner Section -->
+<div class="d-flex justify-content-center my-4">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+    <!-- Product Table -->
+    <div class="my-5">
+      <h3 class="text-center mb-4">Product List Overview</h3>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Available</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Comfort Wheelchair</td>
+              <td>Mobility</td>
+              <td>₹9,999</td>
+              <td><span class="badge bg-success">In Stock</span></td>
+            </tr>
+            <tr>
+              <td>First Aid Medical Kit</td>
+              <td>Health & Safety</td>
+              <td>₹599</td>
+              <td><span class="badge bg-success">In Stock</span></td>
+            </tr>
+            <tr>
+              <td>Weekly Pill Organizer</td>
+              <td>Medication</td>
+              <td>₹199</td>
+              <td><span class="badge bg-warning">Low Stock</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- New Spinner Section -->
+<div class="d-flex justify-content-center my-4">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+
+    <!--Scroll spy-->
+    <div class="container-fluid px-3 px-md-5">
+      <div class="heading3 mb-6">
+        <h2 class="display-5 fw-bold">Frequently asked question</h2>
+      </div>
+    <section class="scroll" data-bs-spy="scroll" data-bs-target="#faq-nav" data-bs-offset="100" tabindex="0" >
+
+      <div class="container-fluid">
+        <div class="row">
+      <!-- Scrollspy Navigation -->
+      <nav class="col-md-3">
+        <div class="position-sticky" style="top: 100px;">
+          <h5 class="text-success mb-3">FAQs</h5>
+          <nav class="nav flex-column">
+            <a class="nav-link text-dark" href="#faq1">What is HomeHeart Assistance?</a>
+            <a class="nav-link text-dark" href="#faq2">How do I place an order?</a>
+            <a class="nav-link text-dark" href="#faq3">Is there a return policy?</a>
+            <a class="nav-link text-dark" href="#faq4">Do you provide home installation?</a>
+            <a class="nav-link text-dark" href="#faq5">How can I contact support?</a>
+          </nav>
+        </div>
+      </nav>
+  
+      <!-- FAQ Content -->
+      <div class="col-md-9 faq-content">
+        <div id="faq1" class="faq-item">
+          <h5 class="text-success">What is HomeHeart Assistance?</h5>
+          <p>We are a trusted caregiving service offering products, personal care, and support for elderly and homebound individuals.</p>
+        </div>
+  
+        <div id="faq2" class="faq-item">
+          <h5 class="text-success">How do I place an order?</h5>
+          <p>Add products to your cart and proceed to checkout. Our streamlined process ensures easy and secure purchasing.</p>
+        </div>
+  
+        <div id="faq3" class="faq-item">
+          <h5 class="text-success">Is there a return policy?</h5>
+          <p>Yes, we accept returns within 7 days of delivery for most items. Please review our <a href="#">return policy</a>.</p>
+        </div>
+  
+        <div id="faq4" class="faq-item">
+          <h5 class="text-success">Do you provide home installation?</h5>
+          <p>Yes, for selected equipment such as mobility aids and bathroom safety products. Request it during checkout.</p>
+        </div>
+  
+        <div id="faq5" class="faq-item">
+          <h5 class="text-success">How can I contact support?</h5>
+          <p>Use our <a href="contact_us.html">contact page</a>, call us at +91 99999 99999, or email support@Homeheart.com.</p>
+        </div>
+      </div>
+    </div>    
+  </div>
+    </section>
+  
+
+    <div class="text-center mt-5">
+      <p>Need help choosing products? <a href="contact_us.html">Contact us</a></p>
+    </div>
+  </div>
+
+  <!-- Popover Trigger Button -->
+<button type="button" class="btn btn-outline-secondary" 
+data-bs-toggle="popover" 
+data-bs-trigger="focus" 
+title="Need Help?" 
+data-bs-content="We're here to assist you with personalized care options. Reach out anytime!">
+<i class="fa-solid fa-circle-info me-2"></i> Learn More
+</button>
+
+<nav aria-label="Page navigation example" class="my-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="aboutus.html" >Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="ex.home.html">1</a></li>
+    <li class="page-item"><a class="page-link" href="aboutus.html">2</a></li>
+    <li class="page-item"><a class="page-link active" href="Store.html">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="Store.html">Next</a>
+    </li>
+  </ul>
+</nav>
+</div>
+
+  <footer class=" text-white pt-5 pb-4">
+    <div class="container text-md-left">
+      <div class="row text-md-left">
+  
+        <!-- About -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">YourBrand</h5>
+          <p>We provide comforting, helpful, and relaxing content to support your peace and wellness every day.</p>
+        </div>
+  
+        <!-- Links -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick Links</h5>
+          <p><a href="#" class="text-white text-decoration-none">Home</a></p>
+          <p><a href="#" class="text-white text-decoration-none">About</a></p>
+          <p><a href="#" class="text-white text-decoration-none">Services</a></p>
+          <p><a href="#" class="text-white text-decoration-none">Contact</a></p>
+        </div>
+  
+        <!-- Useful Links -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Useful</h5>
+          <p><a href="#" class="text-white text-decoration-none">Privacy Policy</a></p>
+          <p><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></p>
+          <p><a href="#" class="text-white text-decoration-none">Help</a></p>
+          <p><a href="#" class="text-white text-decoration-none">FAQs</a></p>
+        </div>
+  
+        <!-- Contact -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+          <p><i class="fas fa-home me-3"></i> India, IN 10001</p>
+          <p><i class="fas fa-envelope me-3"></i> support@Homeheart.com</p>
+          <p><i class="fas fa-phone me-3"></i> +91 99999 99999</p>
+        </div>
+      </div>
+  
+      <!-- Social Icons -->
+      <div class="row d-flex justify-content-center mt-4">
+        <div class="col-md-8 col-lg-8">
+          <div class="text-center">
+            <a href="#" class="text-white me-4"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-white me-4"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white me-4"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white me-4"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Copyright -->
+      <div class="row text-center mt-3">
+        <div class="col-12">
+          <p class="mb-0">&copy; 2025 YourBrand. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Confirmation Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartModalLabel">Added to Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <i class="fa-solid fa-check-circle fa-3x text-success mb-3"></i>
+          <p class="fs-5">Product added to your cart successfully!</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Continue Shopping</button>
+          <a href="checkout.html" class="btn btn-primary">Go to Cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for Modal -->
+  <script>
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+        cartModal.show();
+      });
+    });
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

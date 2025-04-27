@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caregiving Services</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Typeahead.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
+
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #a2d4ab, #ffffff);
+    }
+
+    #heroCarousel{
+      margin-top: 10px;
+      text-align: center;
+      border-radius: 16px;
+      padding: 50px 20px;
+      box-shadow: 0px 4px 12px rgba(14, 13, 13, 0.1);
+    }
+
+    .hero h2, .hero p {
+      background-color: rgba(255,255,255,0.8);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .card {
+      height: 100%;
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      width: 100%;
+      padding: 20px;
+      margin-top: 50px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    .btn-success {
+      background-color: #4CAF50;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: #45a049;
+    }
+
+    .breadcrumb {
+      background: transparent;
+      margin-top: 20px;
+    }
+    .scroll {
+      position: relative;
+    }
+    .faq-content {
+      height: 100vh;
+      overflow-y: scroll;
+    }
+    .faq-item {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+    #faq-nav {
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+    .tt-menu {
+      width: 100%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      padding: 5px 0;
+      z-index: 1000;
+    }
+
+    .tt-suggestion {
+      padding: 5px 15px;
+      cursor: pointer;
+    }
+
+    .tt-suggestion:hover {
+      background-color: blue;
+      color: beige;
+    }
+   
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+  <div class="container-fluid">
+    <!-- Brand Logo with Image -->
+    <a class="navbar-brand fs-2 text-dark" href="#">
+      <img src="https://static.vecteezy.com/system/resources/previews/004/745/862/original/heart-in-house-or-home-free-vector.jpg" alt="Techno-Wed Logo" style="height: 50px; width: auto; margin-right: 10px;">
+      <span class="text-danger">HomeHeart</span>Assistance</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item active"><a class="nav-link" href="ex.home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutus.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="Store.html">Store</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" id="search-box" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <script>
+        $(document).ready(function() {
+          var states = ['Bathing & Grooming','Medication Reminders','Mobility Assistance','Companionship','Oral Care',
+             'General Cleaning','Window Washing','Light Maintenance','Laundry & Ironing','Organization & Decluttering','Customized Meal Plans',
+             'Healthy Ingredient Selection','Portion Control'];
+
+var stateSuggestions = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.whitespace,
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  local: states
+});
+
+$('#search-box').typeahead(
+  {
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'states',
+    source: stateSuggestions
+  }
+);
+});
+</script>
+    </div>
+  </div>
+</nav>
+
+
+
+  <!-- Main Container -->
+  <!-- Bootstrap Carousel Hero -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="hero d-flex flex-column justify-content-center align-items-center "
+           style="background: url('https://thumbs.dreamstime.com/z/elderly-care-set-cartoon-icons-caregivers-helping-old-people-isolated-vector-illustration-264083706.jpg') center/cover no-repeat; height: 400px;">
+        <h2 class="display-4">Dedicated Personal Care Assistance</h2>
+        <p>Your well-being is our top priority. We provide trusted and compassionate care tailored to your needs.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="hero d-flex flex-column justify-content-center align-items-center "
+           style="background: url('https://cdn.pixabay.com/photo/2017/03/06/19/00/old-2123728_1280.jpg') center/cover no-repeat; height: 400px;">
+        <h2 class="display-4">Compassion in Every Step</h2>
+        <p>We’re here to help your loved ones live with dignity and comfort.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="hero d-flex flex-column justify-content-center align-items-center "
+           style="background: url('https://cdn.pixabay.com/photo/2016/11/19/14/00/hand-1838654_1280.jpg') center/cover no-repeat; height: 400px;">
+        <h2 class="display-4">24/7 Reliable Care</h2>
+        <p>Always by your side, whenever you need us.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="ex.home.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="aboutus.html">About Us</a></li>
+        <li class="breadcrumb-item"><a href="Store.html">Store</a></li>
+        <li class="breadcrumb-item"><a href="login.html">Login</a></li>
+      </ol>
+    </nav>
+
+    <section class="row my-5 g-4">
+      <div class="col-md-4 d-flex">
+        <div class="card">
+          <img src="https://cdn5.vectorstock.com/i/1000x1000/45/79/nursing-home-set-patients-and-staff-cartoon-vector-34724579.jpg" alt="Personal Care Assistance" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Personal Care Assistance</h5>
+            <p class="card-text">We offer daily assistance with bathing, grooming, and personal hygiene to help you maintain your dignity and comfort.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex">
+        <div class="card">
+          <img src="https://static.vecteezy.com/system/resources/previews/019/500/599/original/cleaning-service-housekeeping-and-office-clean-maintenance-vector.jpg" alt="House Cleaning & Maintenance" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">House Cleaning & Maintenance</h5>
+            <p class="card-text">Our caregivers provide light housekeeping, cleaning, and home maintenance to ensure your living space is clean and safe.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex">
+        <div class="card">
+          <img src="https://th.bing.com/th/id/OIP.OXt-_BF1NilMPOLg_q3E8AHaE8?rs=1&pid=ImgDetMain" alt="Meal Preparation" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Meal Preparation</h5>
+            <p class="card-text">We assist with meal planning and preparation to ensure you receive healthy, nutritious meals according to your dietary needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+<div class="heading2 ">
+    <h2 class="display-4 fw-bold">Services provided by our HomeHeart Assistance</h2>
+</div>
+
+<!--Heading1 Personal care-->
+    <div class="container-fluid px-3 px-md-5">
+        <div class="heading3 mb-5">
+          <h3 class="display-5 fw-bold">Personal Care Assistance</h3>
+          <p>Your comfort, dignity, and well-being are at the heart of everything we do. Our dedicated caregivers offer compassionate, one-on-one support tailored to your unique needs — from assistance with daily activities and personal hygiene to mobility support and companionship. We’re here to ensure you feel safe, cared for, and truly valued every day.</p>
+        </div>
+    
+        <div class="row g-4">
+          <!-- Repeatable card component -->
+          <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+            <div class="card w-100">
+              <img src="https://media.istockphoto.com/vectors/bathing-support-for-elderly-women-wiping-hands-male-caregiver-vector-id1287312888?k=20&m=1287312888&s=612x612&w=0&h=SvCOsNv_kysFkxZu860ztwMfuplPkUjbHcrmavAtIQs=" class="card-img-top" alt="Caregiver assisting elderly woman with bathing">
+              <div class="card-body">
+                <h5 class="card-title">Bathing & Grooming</h5>
+                <p class="card-text">Assistance with daily hygiene routines to help you feel clean and refreshed.</p>
+                <button class="btn btn-success btn-book w-100 " data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+            <div class="card w-100">
+              <img src="https://image.shutterstock.com/image-vector/remind-take-pills-homecare-service-260nw-2012726114.jpg" class="card-img-top" alt="Pill reminder service illustration">
+              <div class="card-body">
+                <h5 class="card-title">Medication Reminders</h5>
+                <p class="card-text">Stay on track with your prescriptions and routines with our gentle reminders.</p>
+                <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+            <div class="card w-100">
+              <img src="https://cdn.pixabay.com/photo/2020/11/05/17/24/elderly-5716414_1280.jpg" class="card-img-top" alt="Caregiver helping senior walk with a walker">
+              <div class="card-body">
+                <h5 class="card-title">Mobility Assistance</h5>
+                <p class="card-text">Support for moving around safely and confidently within your home.</p>
+                <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+            <div class="card w-100">
+              <img src="https://th.bing.com/th/id/OIP.IQ10lpS130OojtsK5wq9qwAAAA?rs=1&pid=ImgDetMain" class="card-img-top" alt="Smiling elderly person chatting with caregiver">
+              <div class="card-body">
+                <h5 class="card-title">Companionship</h5>
+                <p class="card-text">We provide emotional support and meaningful interaction to brighten your day.</p>
+                <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+            <div class="card w-100">
+              <img src="https://img.freepik.com/premium-vector/caregiver-providing-oral-care-person-with-developmental-disability-helping-maintain-their-dental-health-prevent-potential-brain-s-vector-illustration_216520-201537.jpg" class="card-img-top" alt="Caregiver assisting with oral hygiene">
+              <div class="card-body">
+                <h5 class="card-title">Oral Care</h5>
+                <p class="card-text">Helping maintain good oral hygiene for comfort and health.</p>
+                <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--Heading2 house cleaning-->
+    <div class="container-fluid px-5 px-md-5">
+      <div class="heading2 mb-5">
+        <h2 class="display-5 fw-bold">House Cleaning & Maintenance</h2>
+        <p class="lead">Enjoy peace of mind with a clean, organized, and well-maintained home — without lifting a finger. Our professional team takes care of everything from routine cleaning to minor home repairs, ensuring your space remains comfortable, hygienic, and safe. Reliable service, attention to detail, and care you can count on — all just a booking away.</p>
+      </div>
+  
+      <!-- Cards Section -->
+      <div class="row g-4 mb-5">
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img src="https://static.vecteezy.com/system/resources/previews/002/620/265/non_2x/man-cleaning-worker-with-cleaning-trolley-man-janitor-with-cleaning-trolley-vector.jpg" class="card-img-top" alt="Worker with cleaning trolley for general house cleaning">
+            <div class="card-body">
+              <h5 class="card-title">General Cleaning</h5>
+              <p class="card-text">Comprehensive cleaning including dusting, vacuuming, and mopping to keep your space fresh.</p>
+              <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img src="https://www.shutterstock.com/image-vector/flat-man-washes-window-cleaning-600nw-633271031.jpg" class="card-img-top" alt="Man washing window for window cleaning services">
+            <div class="card-body">
+              <h5 class="card-title">Window Washing</h5>
+              <p class="card-text">Crystal-clear windows for a brighter home and better views.</p>
+              <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img src="https://thumbs.dreamstime.com/b/electrician-repair-maintenance-service-technician-fixing-electric-light-equipment-family-people-vector-illustration-cartoon-232113188.jpg" class="card-img-top" alt="Technician fixing a light bulb for maintenance">
+            <div class="card-body">
+              <h5 class="card-title">Light Maintenance</h5>
+              <p class="card-text">Minor fixes like changing light bulbs and home upkeep done with ease.</p>
+              <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img src="https://png.pngtree.com/png-vector/20220707/ourlarge/pngtree-laundry-service-worker-ironing-png-image_5740662.png" class="card-img-top" alt="Laundry service worker ironing clothes">
+            <div class="card-body">
+              <h5 class="card-title">Laundry & Ironing</h5>
+              <p class="card-text">Professional laundry services that leave your clothes fresh, neat, and wrinkle-free.</p>
+              <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img src="https://media.istockphoto.com/vectors/moving-in-together-vector-id1186406304?k=6&m=1186406304&s=612x612&w=0&h=syKQYMnBcDdjAs8IY0AgLBy4NqiMkzgXaeqHLWaj88I=" class="card-img-top" alt="People organizing and decluttering home">
+            <div class="card-body">
+              <h5 class="card-title">Organization & Decluttering</h5>
+              <p class="card-text">We help create harmony and calm by organizing and decluttering your living space.</p>
+              <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+         <!-- Heading3 meal preparation -->
+  <div class="container-fluid px-3 px-md-5">
+    <div class="heading3 mb-5">
+      <h2 class="display-5 fw-bold">Meal Preparation Services</h2>
+      <p class="lead">Delicious, nutritious meals made just for you. Our Meal Preparation service offers personalized meal planning and cooking tailored to your dietary needs, preferences, and lifestyle. Whether it’s managing specific health conditions, supporting wellness goals, or simply saving you time — we bring healthy, home-cooked meals to your table with care and convenience.</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="row g-4 mb-5">
+      <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+        <div class="card w-100">
+          <img src="https://th.bing.com/th/id/OIP.q7Suqh2lAaugMYEcTVZnsgHaHa?rs=1&pid=ImgDetMain" class="card-img-top" alt="Tailored meal plans illustration">
+          <div class="card-body">
+            <h5 class="card-title">Customized Meal Plans</h5>
+            <p class="card-text">Tailored meal plans to meet your dietary requirements and personal preferences.</p>
+            <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+        <div class="card w-100">
+          <img src="https://img.freepik.com/free-vector/people-healthy-food_24908-55214.jpg?semt=ais_hybrid" class="card-img-top" alt="People with healthy food illustration">
+          <div class="card-body">
+            <h5 class="card-title">Healthy Ingredient Selection</h5>
+            <p class="card-text">We source and prepare fresh, nutritious ingredients for every meal.</p>
+            <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+        <div class="card w-100">
+          <img src="https://assets.sweat.com/html_body_blocks/images/000/014/384/original/PortionSizes_en0d599d43e23433ab1c2aa653f140a7e5.jpg?1570139363" class="card-img-top" alt="Healthy food portion control image">
+          <div class="card-body">
+            <h5 class="card-title">Portion Control</h5>
+            <p class="card-text">Portion and store meals for easy reheating and convenience.</p>
+            <button class="btn btn-success btn-book w-100" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="row my-5">
+      <div class="col-md-12 d-flex justify-content-center">
+        <div class="card text-center p-4" style="width: 100%; max-width: 500px;">
+          <div class="card-body">
+            <h5 class="card-title">Today's Task</h5>
+            <p class="card-text">Fetching the latest caregiving activities and tasks...</p>
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Scroll spy-->
+    <div class="container-fluid px-3 px-md-5">
+      <div class="heading3 mb-6">
+        <h2 class="display-5 fw-bold">Frequently asked question</h2>
+      </div>
+    <section class="scroll" data-bs-spy="scroll" data-bs-target="#faq-nav" data-bs-offset="100" tabindex="0" >
+
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Sidebar Navigation -->
+          <nav id="faq-nav" class="col-md-3 d-none d-md-block bg-light position-sticky" style="top: 0;">
+            <nav class="nav flex-column p-3">
+              <a class="nav-link active" href="#faq1">What services do you offer?</a>
+              <a class="nav-link" href="#faq2">Are your caregivers certified?</a>
+              <a class="nav-link" href="#faq3">Can I choose the caregiver?</a>
+              <a class="nav-link" href="#faq4">Is service available 24/7?</a>
+              <a class="nav-link" href="#faq5">What are the payment options?</a>
+              <a class="nav-link" href="#faq6">Do you accept insurance?</a>
+              <a class="nav-link" href="#faq7">What if there's an emergency?</a>
+              <a class="nav-link" href="#faq8">What languages do your caregivers speak?</a>
+              <a class="nav-link" href="#faq9">What is your cancellation policy?</a>
+            </nav>
+          </nav>
+    
+          <!-- FAQ Content -->
+          <div class="col-md-9 faq-content">
+            <div id="faq1" class="faq-item">
+              <h4>What services do you offer?</h4>
+              <p>We provide personal care, companionship, medication reminders, mobility assistance, meal preparation, and light housekeeping tailored to each client’s needs.</p>
+            </div>
+            <div id="faq2" class="faq-item">
+              <h4>Are your caregivers certified?</h4>
+              <p>Yes, all our caregivers are trained, background-checked, and certified in caregiving, CPR, and first aid.</p>
+            </div>
+            <div id="faq3" class="faq-item">
+              <h4>Can I choose the caregiver?</h4>
+              <p>Absolutely! We match caregivers based on personality, skills, and care needs to ensure a good fit.</p>
+            </div>
+            <div id="faq4" class="faq-item">
+              <h4>Is service available 24/7?</h4>
+              <p>Yes, we offer around-the-clock care including live-in and overnight services.</p>
+            </div>
+            <div id="faq5" class="faq-item">
+              <h4>What are the payment options?</h4>
+              <p>We accept private pay, long-term care insurance, and Medicaid waivers where applicable.</p>
+            </div>
+            <div id="faq6" class="faq-item">
+              <h4>Do you accept insurance?</h4>
+              <p>We accept many long-term care insurance policies. Contact us for assistance with coverage and claims.</p>
+            </div>
+            <div id="faq7" class="faq-item">
+              <h4>What if there's an emergency?</h4>
+              <p>We have 24/7 support and on-call staff for urgent situations. Caregivers are trained to respond and report emergencies quickly.</p>
+            </div>
+            <div id="faq8" class="faq-item">
+              <h4>What languages do your caregivers speak?</h4>
+              <p>We have multilingual caregivers. Let us know your language preference during consultation.</p>
+            </div>
+            <div id="faq9" class="faq-item">
+              <h4>What is your cancellation policy?</h4>
+              <p>We request 24 hours' notice for cancellations. For recurring care, different terms may apply.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center my-5">
+      <h3>Contact Us for More Information</h3>
+      <p>Ready to get started or need more details? Reach out to us today!</p>
+    <!-- Button to Trigger Modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#contactModal">
+    Contact Us
+  </button>
+  
+  <!-- Contact Us Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <!-- Modal Body with Form -->
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="contactName" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="contactName" placeholder="Enter your name" required>
+            </div>
+            <div class="mb-3">
+              <label for="contactEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="contactEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+              <label for="contactMessage" class="form-label">Message</label>
+              <textarea class="form-control" id="contactMessage" rows="4" placeholder="Write your message here..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+    </section>
+  
+    <!-- Popover Trigger Button -->
+<button type="button" class="btn btn-outline-secondary" 
+data-bs-toggle="popover" 
+data-bs-trigger="focus" 
+title="Need Help?" 
+data-bs-content="We're here to assist you with personalized care options. Reach out anytime!">
+<i class="fa-solid fa-circle-info me-2"></i> Learn More
+</button>
+
+   
+<nav aria-label="Page navigation example" class="my-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="ex.home.html" >Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link active" href="ex.home.html">1</a></li>
+    <li class="page-item"><a class="page-link " href="aboutus.html">2</a></li>
+    <li class="page-item"><a class="page-link" href="Store.html">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="aboutus.html">Next</a>
+    </li>
+  </ul>
+</nav>
+</div>       
+
+
+<!-- Footer -->
+
+<footer class=" text-white pt-5 pb-4">
+  <div class="container-fluid text-md-left">
+    <div class="row text-md-left">
+
+      <!-- About -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">YourBrand</h5>
+        <p>We provide comforting, helpful, and relaxing content to support your peace and wellness every day.</p>
+      </div>
+
+      <!-- Links -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick Links</h5>
+        <p><a href="#" class="text-white text-decoration-none">Home</a></p>
+        <p><a href="#" class="text-white text-decoration-none">About</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Services</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Contact</a></p>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Useful</h5>
+        <p><a href="#" class="text-white text-decoration-none">Privacy Policy</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Help</a></p>
+        <p><a href="#" class="text-white text-decoration-none">FAQs</a></p>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+        <p><i class="fas fa-home me-3"></i> India, IN 10001</p>
+        <p><i class="fas fa-envelope me-3"></i> support@yourbrand.com</p>
+        <p><i class="fas fa-phone me-3"></i> +91 99999 99999</p>
+      </div>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="row d-flex justify-content-center mt-4">
+      <div class="col-md-8 col-lg-8">
+        <div class="text-center">
+          <a href="#" class="text-white me-4"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white me-4"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="row text-center mt-3">
+      <div class="col-12">
+        <p class="mb-0">&copy; 2025 YourBrand. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookingModalLabel">Book a Service</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Please contact us or log in to schedule your service.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="login.html" class="btn btn-success">Log In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
